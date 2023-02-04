@@ -3,6 +3,9 @@ use std::{
     thread,
 };
 
+/// # ThreadPool
+/// Simple thread pool implementation to limit the number of threads created
+/// for handling incoming requests
 pub struct ThreadPool {
     workers: Vec<Worker>,
     sender: Option<mpsc::Sender<Job>>,

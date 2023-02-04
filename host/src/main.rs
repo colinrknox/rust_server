@@ -15,7 +15,9 @@ fn main() {
         let stream = stream.unwrap();
 
         println!("Connection established");
-        pool.execute(|| handle_connection(stream));
+        pool.execute(|| {
+            handle_connection(stream);
+        });
     }
 
     println!("Shutting down!");
