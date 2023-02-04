@@ -8,6 +8,12 @@ type Job = Box<dyn FnOnce() + Send + 'static>;
 /// # ThreadPool
 /// Simple thread pool implementation to limit the number of threads created
 /// for handling incoming requests
+/// ##Usage
+/// '''
+/// let thread_pool = ThreadPool::new(4); // Establish thread pool with 4 maximum threads of execution
+/// thread_pool.execute(|| {
+///     // your logic for the thread to run
+/// });
 pub struct ThreadPool {
     workers: Vec<Worker>,
     sender: Option<mpsc::Sender<Job>>,
