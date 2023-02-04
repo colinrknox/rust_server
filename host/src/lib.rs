@@ -38,8 +38,8 @@ impl ThreadPool {
     }
 
     pub fn execute<F>(&self, f: F)
-        where
-            F: FnOnce() + Send + 'static,
+    where
+        F: FnOnce() + Send + 'static,
     {
         let job = Box::new(f);
 
@@ -49,6 +49,8 @@ impl ThreadPool {
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
+        drop(self.sender.take());
+
         for worker in &mut self.workers {
             println!("Shutting down worker {}", worker.id);
 
@@ -88,6 +90,4 @@ impl Worker {
 }
 
 #[cfg(test)]
-mod test {
-
-}
+mod test {}
